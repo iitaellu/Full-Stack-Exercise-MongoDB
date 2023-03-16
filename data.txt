@@ -1,0 +1,90 @@
+db.data.insertone({
+    title: 'Post One',
+    body: 'Body of post one',
+    category: 'News',
+    likes: 4,
+    tags: ['news', 'events'],
+    user: {
+        name: 'Ida Kirveskoski',
+        status: 'author
+    },
+    date: Date()
+})
+
+db.data.insertOne({
+  title: 'Hello world', 
+  body:'Body of hello world', 
+  category: 'News',
+  likes: 4, 
+  tags: ['news', 'events'], 
+  user: { 
+    name: 'Ida kirveskoski', 
+    status: 'author'}, 
+    date: Date()
+  
+})
+
+db.data.insertMany([
+  {
+  title: 'Hello world again', 
+  body:'Body of hello world again',  
+  category: 'Technology',
+  date: Date()
+  },
+  {
+  title: 'It is me', 
+  body:'Body of it is me',  
+  category: 'News',
+  date: Date()
+  },
+  {
+  title: 'Hello there', 
+  body:'Body of hellothere',  
+  category: 'Life',
+  date: Date()
+  }
+])
+
+db.data.update({ title: 'Hello world again'},
+  {
+  title: 'Hello world again', 
+  body:'NEW Body of hello world again',  
+  category: 'Technology',
+  date: Date()
+  },
+  {
+    upsert: true
+  })
+
+db.data.update({ title: 'Hello world'},
+  {
+    $set: {
+        comments: [
+            {
+                user: 'Some User',
+                body: 'Comment one',
+                date: Date()
+            },
+            {
+                user: 'Other User',
+                body: 'Comment two',
+                date: Date()
+            }
+        ]
+    }
+  }
+)
+
+db.data.find({
+   comments: {
+    $elemMatch: {
+        user: 'Some User'
+    }
+   }
+})
+
+db.data.find({
+   $text: {
+    $search: "\" Post o\""
+   }
+})
